@@ -1,0 +1,354 @@
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
+  background-color: rgb(37, 39, 56);
+  color: white;
+}
+
+/* Zera tudo */
+html, body, #root, .mainContainer {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(37, 39, 56);
+}
+
+/* Container principal do app */
+.mainContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Conteúdo principal do app */
+.app-content {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Sidebar wrapper à direita */
+.sidebar-outer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  pointer-events: none; /* só os filhos recebem eventos */
+}
+
+/* Sidebar FECHADA */
+.sidebar-closed {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  pointer-events: all;
+}
+
+.sidebar-toggle-btn.closed {
+  width: 38px;
+  height: 60px;
+  background: rgb(56, 58, 75);
+  border: none;
+  border-radius: 0 16px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: background 0.2s;
+  pointer-events: all;
+}
+
+.arrow.closed {
+  font-size: 28px;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  transform: rotate(180deg); /* seta para a direita */
+  user-select: none;
+}
+
+/* Sidebar ABERTA */
+.sidebar-open {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100vh;
+  pointer-events: all;
+}
+
+.sidebar-content {
+  width: 320px;
+  height: 100vh;
+  background: rgb(56, 58, 75);
+  box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  transform: translateX(0);
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  border-radius: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.sidebar-toggle-btn.open {
+  width: 38px;
+  height: 60px;
+  background: rgb(56, 58, 75);
+  border: none;
+  border-radius: 0 16px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: background 0.2s;
+  z-index: 2;
+  pointer-events: all;
+}
+
+.arrow.open {
+  font-size: 28px;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  transform: rotate(0deg); /* seta para a esquerda */
+  user-select: none;
+}
+
+/* Garante que não tenha overflow lateral */
+body, html {
+  overflow-x: hidden !important;
+}
+
+.titlebar {
+  height: 27px;
+  width: 100%;
+  border-bottom: 1.8px solid rgb(56, 58, 75);
+  -webkit-app-region: drag;
+}
+
+.close-bar {
+  height: 100%;
+  width: 50px;
+  float: right;
+  background-color: rgb(37, 39, 56);
+  border: none;
+  border-left: 1px solid rgb(56, 58, 75);
+  border-right: 1px solid rgb(56, 58, 75);
+  transition: 0.2s;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.856);
+  -webkit-app-region: no-drag;
+}
+
+.close-bar:hover {
+  background-color: rgba(56, 58, 75, 0.918);
+}
+
+.minimize-bar {
+  font-size: 20px;
+  height: 100%;
+  width: 50px;
+  float: right;
+  background-color: rgb(37, 39, 56);
+  border: none;
+  border-left: 1px solid rgb(56, 58, 75);
+  transition: 0.2s;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.856);
+  -webkit-app-region: no-drag;
+}
+
+.minimize-bar:hover {
+  background-color: rgba(56, 58, 75, 0.918);
+}
+
+.searchbar-configbtns {
+  display: flex;
+  height: 50px;
+  border-bottom: 1px solid rgb(56, 58, 75);
+  margin-top: 4px;
+}
+
+.search-bar {
+  border: none;
+  padding: 5px;
+  width: 400px;
+  height: 32px;
+  
+  margin-right: 0;
+  border-radius: 0;
+}
+
+.search-bar:focus {
+  outline: none;
+  outline-color: black;
+}
+
+.search-bar-container label {
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.search-bar-container {
+  margin-left: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.search-btn {
+  border: none;
+  background: #fff;
+  height: 32px;
+  width: 38px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  border-left: 1px solid #ccc;
+  padding: 0;
+}
+
+.search-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.buttons-config {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.download-btn {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 32px;
+  width: 38px;
+  font-size: 22px;
+  color: rgb(56, 58, 75);
+  background-color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.settings-btn {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 32px;
+  width: 38px;
+  font-size: 22px;
+  color: rgb(56, 58, 75);
+  background-color: #fff;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+
+.sidebar-animated-outer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+.sidebar-animated-inner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  pointer-events: all;
+}
+
+.side-bar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-container {
+  margin-top: 12px;
+  background-color: rgb(56, 58, 75);
+  width: 330px;
+  height: 507px;
+  margin-left: auto;
+  border-radius: 5px 0 0 5px;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar-toggle-btn {
+  width: 46px;
+  height: 40px;
+  background: rgb(56, 58, 75);
+  border: none;
+  border-radius: 16px 0 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  z-index: 3;
+  transition: right 0.35s cubic-bezier(.4,0,.2,1), background 0.2s, border-radius 0.2s;
+}
+
+.arrow {
+  font-size: 45px;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  user-select: none;
+}
+
+/* Garante que não tenha overflow lateral */
+body, html {
+  overflow-x: hidden !important;
+}
