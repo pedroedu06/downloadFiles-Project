@@ -147,7 +147,7 @@ body, html {
 .titlebar {
   height: 27px;
   width: 100%;
-  border-bottom: 1.8px solid rgb(56, 58, 75);
+  border-bottom: 1.8px solid #383a4b;
   -webkit-app-region: drag;
 }
 
@@ -189,7 +189,7 @@ body, html {
 
 .searchbar-configbtns {
   display: flex;
-  height: 50px;
+  height: 60px;
   border-bottom: 1px solid rgb(56, 58, 75);
   margin-top: 4px;
 }

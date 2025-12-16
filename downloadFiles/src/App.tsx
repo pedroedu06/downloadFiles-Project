@@ -4,10 +4,11 @@ import { IoIosSearch } from "react-icons/io";
 import { IoMdDownload } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [open, setOpen] = useState(true);
+  const [videos, setVideos] = useState([]);
 
   const close = () => {
     getCurrentWindow().close();
@@ -15,6 +16,14 @@ function App() {
   const minizimize = () => {
     getCurrentWindow().minimize();
   };
+
+  useEffect(() => {
+    fetch('http://localhost:3000/feed')
+      .then(res => res.json())
+      .then(videos => {
+        setVideos(videos);
+      })
+  }, []);
 
   return (
     <div className="mainContainer">
@@ -26,8 +35,8 @@ function App() {
       <section className="searchbar-configbtns">
         <div className="search-bar-container">
           <label htmlFor="search-bar-url">Busca: </label>
-          <input type="search" className="search-bar" name="search-bar-url" placeholder="Buscar o video"/>
-          <button className="search-btn"><IoIosSearch/></button>
+          <input type="search" className="search-bar" name="search-bar-url" placeholder="Buscar o video" />
+          <button className="search-btn"><IoIosSearch /></button>
         </div>
         <div className="buttons-config">
           <button className="download-btn"><IoMdDownload /></button>
@@ -35,7 +44,7 @@ function App() {
         </div>
       </section>
 
-      <div className="side-bar" style={{position: "relative"}}>
+      <div className="side-bar" style={{ position: "relative" }}>
         <div
           className="sidebar-container"
           style={{
@@ -45,7 +54,7 @@ function App() {
             zIndex: 2,
           }}
         >
-          <span style={{opacity: open ? 1 : 0, transition: "opacity 0.2s"}}>aa</span>
+          <span style={{ opacity: open ? 1 : 0, transition: "opacity 0.2s" }}>aa</span>
         </div>
         <button
           className="sidebar-toggle-btn"
@@ -81,6 +90,10 @@ function App() {
           </span>
         </button>
       </div>
+      <section className="YT-Feed">
+        <iframe src={`https://www.youtube.com/embed/${videos[0]?.id}`}></iframe>
+      </section>
+
     </div>
   );
 }
