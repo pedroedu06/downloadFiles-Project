@@ -1,4 +1,4 @@
-:root {
+#root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,9 +7,9 @@
   font-size: large;
   background-color: rgb(37, 39, 56);
   color: white;
+  overflow: hidden;
 }
 
-/* Zera tudo */
 html, body, #root, .mainContainer {
   margin: 0;
   padding: 0;
@@ -20,7 +20,6 @@ html, body, #root, .mainContainer {
   background: rgb(37, 39, 56);
 }
 
-/* Container principal do app */
 .mainContainer {
   position: relative;
   width: 100vw;
@@ -30,118 +29,12 @@ html, body, #root, .mainContainer {
   flex-direction: column;
 }
 
-/* Conteúdo principal do app */
 .app-content {
   flex: 1 1 auto;
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
-}
-
-/* Sidebar wrapper à direita */
-.sidebar-outer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  pointer-events: none; /* só os filhos recebem eventos */
-}
-
-/* Sidebar FECHADA */
-.sidebar-closed {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  pointer-events: all;
-}
-
-.sidebar-toggle-btn.closed {
-  width: 38px;
-  height: 60px;
-  background: rgb(56, 58, 75);
-  border: none;
-  border-radius: 0 16px 16px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  cursor: pointer;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  transition: background 0.2s;
-  pointer-events: all;
-}
-
-.arrow.closed {
-  font-size: 28px;
-  color: #fff;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-  transform: rotate(180deg); /* seta para a direita */
-  user-select: none;
-}
-
-/* Sidebar ABERTA */
-.sidebar-open {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100vh;
-  pointer-events: all;
-}
-
-.sidebar-content {
-  width: 320px;
-  height: 100vh;
-  background: rgb(56, 58, 75);
-  box-shadow: -2px 0 8px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  transform: translateX(0);
-  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-  border-radius: 0;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.sidebar-toggle-btn.open {
-  width: 38px;
-  height: 60px;
-  background: rgb(56, 58, 75);
-  border: none;
-  border-radius: 0 16px 16px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  cursor: pointer;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  transition: background 0.2s;
-  z-index: 2;
-  pointer-events: all;
-}
-
-.arrow.open {
-  font-size: 28px;
-  color: #fff;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-  transform: rotate(0deg); /* seta para a esquerda */
-  user-select: none;
-}
-
-/* Garante que não tenha overflow lateral */
-body, html {
-  overflow-x: hidden !important;
 }
 
 .titlebar {
@@ -220,7 +113,7 @@ body, html {
   align-items: center;
 }
 
-.search-btn {
+.download-btn {
   border: none;
   background: #fff;
   height: 32px;
@@ -236,7 +129,7 @@ body, html {
   padding: 0;
 }
 
-.search-btn img {
+.download-btn img {
   width: 18px;
   height: 18px;
 }
@@ -245,19 +138,6 @@ body, html {
   margin-left: auto;
   display: flex;
   align-items: center;
-}
-
-.download-btn {
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  height: 32px;
-  width: 38px;
-  font-size: 22px;
-  color: rgb(56, 58, 75);
-  background-color: #fff;
-  margin-right: 10px;
-  cursor: pointer;
 }
 
 .settings-btn {
@@ -273,6 +153,18 @@ body, html {
   margin-right: 30px;
 }
 
+.updatepage-btn {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 32px;
+  width: 38px;
+  font-size: 19px;
+  color: rgb(56, 58, 75);
+  background-color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+}
 
 .sidebar-animated-outer {
   position: fixed;
@@ -305,6 +197,17 @@ body, html {
   height: 100%;
 }
 
+/* Evita que o wrapper da sidebar (que ocupa 100% da área) bloqueie
+   a interação com o grid abaixo. Habilita eventos apenas nos filhos que
+   precisam receber cliques. */
+.side-bar {
+  pointer-events: none;
+}
+.side-bar .sidebar-container,
+.side-bar .sidebar-toggle-btn {
+  pointer-events: auto;
+}
+
 .sidebar-container {
   margin-top: 12px;
   background-color: rgb(56, 58, 75);
@@ -320,35 +223,19 @@ body, html {
   z-index: 2;
 }
 
-.sidebar-toggle-btn {
-  width: 46px;
-  height: 40px;
-  background: rgb(56, 58, 75);
-  border: none;
-  border-radius: 16px 0 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  cursor: pointer;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  right: 0;
-  top: 10px;
-  z-index: 3;
-  transition: right 0.35s cubic-bezier(.4,0,.2,1), background 0.2s, border-radius 0.2s;
-}
-
-.arrow {
-  font-size: 45px;
-  color: #fff;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-  user-select: none;
-}
-
-/* Garante que não tenha overflow lateral */
 body, html {
   overflow-x: hidden !important;
+}
+
+
+.sidebar-backdrop {
+  position: fixed;
+  top: 91px; 
+  left: 0;
+  right: 0;
+  height: 507px; 
+  background: rgba(0, 0, 0, 0.50);
+  z-index: 1; 
+  pointer-events: none; 
+  transition: opacity 200ms ease;
 }

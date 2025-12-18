@@ -1,8 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import { getVideos } from './configYT.ts'
 import { recommendVideos } from './configrecomendedvideos.ts';
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 app.get('/feed', async (__, res) => {
     try {
