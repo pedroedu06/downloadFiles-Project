@@ -1,16 +1,17 @@
 import "./App.css";
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { IoIosSearch } from "react-icons/io";
 import { IoMdDownload } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useState } from "react";
 import { GrUpdate } from "react-icons/gr";
 import VideoGrid from './components/VideoGrid';
+import axios from "axios";
 
 
 function App() {
   const [open, setOpen] = useState(true);
+  const [link, setLink] = useState('');
 
   const close = () => {
     getCurrentWindow().close();
@@ -19,6 +20,17 @@ function App() {
     getCurrentWindow().minimize();
   };
 
+  const handleSendLink = () => {
+    axios.post('http://localhost:8000/downloadtask', { url: link })
+    .then(response => {
+      console.log('Download iniciado:', response.data);
+    })
+    .catch(error => {
+      console.log("error", error)
+    });    
+  }
+
+  console.log(link)
   return (
     <div className="mainContainer">
       <section className="titlebar">
@@ -29,8 +41,8 @@ function App() {
       <section className="searchbar-configbtns">
         <div className="search-bar-container">
           <label htmlFor="search-bar-url">Busca: </label>
-          <input type="search" className="search-bar" name="search-bar-url" placeholder="Buscar o video" />
-          <button className="download-btn"><IoMdDownload /></button>
+          <input type="search" className="search-bar" name="search-bar-url" placeholder="Buscar o video" onChange={(e) => setLink(e.target.value)} />
+          <button className="download-btn" onClick={handleSendLink}><IoMdDownload /></button>
         </div>
         <div className="buttons-config">
           <button className="updatepage-btn"><GrUpdate /></button>
