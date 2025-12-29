@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/feed || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

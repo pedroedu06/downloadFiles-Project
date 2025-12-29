@@ -1,4 +1,4 @@
-import type { VideoInfo } from "./types.ts";
+import type { VideoInfo } from "./types";
 
 export function calculateScore(video: VideoInfo): number {
     const viewsWeight = 0.6;

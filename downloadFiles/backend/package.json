@@ -1,0 +1,21 @@
+{
+  "name": "downloadfiles-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.2",
+    "@types/cors": "^2.8.19"
+  }
+}

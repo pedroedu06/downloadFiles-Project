@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { getVideos } from './configYT.ts'
-import { recommendVideos } from './configrecomendedvideos.ts';
+import { getVideos } from './configYT'
+import { recommendVideos } from './configrecomendedvideos';
 
 const app = express();
 

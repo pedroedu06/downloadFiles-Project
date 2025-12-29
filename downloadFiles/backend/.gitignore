@@ -1,1 +1,6 @@
 .env
+.env.example
+.dockerignore
+node_modules
+tsconfig.json
+packege.json

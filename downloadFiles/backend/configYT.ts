@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import type { VideoInfo } from './types.ts';
+import type { VideoInfo } from './types';
 import axios from 'axios';
 
 const apikey = process.env.YT_DATA_API_KEY;
