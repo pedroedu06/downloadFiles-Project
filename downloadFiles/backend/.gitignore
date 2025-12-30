@@ -1,5 +1,6 @@
 .env
+.env.production
 .dockerignore
 node_modules
 tsconfig.json
-packege.json
+package.json

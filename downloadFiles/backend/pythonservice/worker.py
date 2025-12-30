@@ -24,7 +24,7 @@ def process_job(job_id: str, url: str):
 
     ydl_opts = {
         "progress_hooks": [hook],
-        "outtmpl": str(DOWNLOAD_DIR / job_id / "%(title)s.%(ext)s"),
+        "outtmpl": str(DOWNLOAD_DIR / "%(title)s.%(ext)s"),
         "js-runtimes": ["node"],
     }
 

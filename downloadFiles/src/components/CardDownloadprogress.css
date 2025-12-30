@@ -1,0 +1,60 @@
+.cv-card-progress {
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 8px;
+}
+.cv-card-progress-container {
+    background-color: #1f2937;
+    width: 280px;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cv-close-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cv-close-item {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+}
+
+.cv-video-info-container{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.cv-video-thumbnail{
+    width:72px;
+    height:72px;
+    object-fit:cover;
+    border-radius:6px;
+    background: #111827;
+}
+
+.cv-video-meta{
+    flex:1;
+}
+
+.cv-video-title{
+    font-size:14px;
+    margin:0;
+    line-height:1.2;
+    font-weight:600;
+}

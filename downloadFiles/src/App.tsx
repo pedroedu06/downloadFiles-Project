@@ -7,11 +7,13 @@ import { useState } from "react";
 import { GrUpdate } from "react-icons/gr";
 import VideoGrid from './components/VideoGrid';
 import axios from "axios";
+import CardDownloadprogress from "./components/CardDownloadprogress";
 
 
 function App() {
   const [open, setOpen] = useState(true);
   const [link, setLink] = useState('');
+  const [previews, setPreviews] = useState<Array<{id:string,title:string,thumbnail:string}>>([]);
 
   const close = () => {
     getCurrentWindow().close();
@@ -21,6 +23,7 @@ function App() {
   };
 
   const handleSendLink = () => {
+    // mantém a função que dispara o download no backend
     axios.post('http://localhost:8000/downloadtask', { url: link })
     .then(response => {
       console.log('Download iniciado:', response.data);
@@ -30,7 +33,18 @@ function App() {
     });    
   }
 
-  console.log(link)
+  const handlePreviwDownload = () => {
+    // chama o endpoint de preview e monta um card simples (sem barra de progresso)
+    axios.post('http://localhost:3000/getInfoVideo', { url: link})
+    .then(res => {
+      console.log('Preview info:', res.data);
+      const id = String(Date.now());
+      setPreviews(prev => [{ id, title: res.data.title || 'Sem título', thumbnail: res.data.thunbnail || res.data.thumbnail || '' }, ...prev]);
+    }).catch(error => {
+      console.log("error no preview", error)
+    })
+  }
+
   return (
     <div className="mainContainer">
       <section className="titlebar">
@@ -42,7 +56,7 @@ function App() {
         <div className="search-bar-container">
           <label htmlFor="search-bar-url">Busca: </label>
           <input type="search" className="search-bar" name="search-bar-url" placeholder="Buscar o video" onChange={(e) => setLink(e.target.value)} />
-          <button className="download-btn" onClick={handleSendLink}><IoMdDownload /></button>
+          <button className="download-btn" onClick={() => { handleSendLink(); handlePreviwDownload(); }}><IoMdDownload /></button>
         </div>
         <div className="buttons-config">
           <button className="updatepage-btn"><GrUpdate /></button>
@@ -64,9 +78,15 @@ function App() {
             transition: "transform 0.35s cubic-bezier(.4,0,.2,1)",
             position: "relative",
             zIndex: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+            padding: '12px'
           }}
         >
-          <span style={{ opacity: open ? 1 : 0, transition: "opacity 0.2s" }}>aa</span>
+          {previews.map(p => (
+            <CardDownloadprogress key={p.id} id={p.id} title={p.title} thumbnail={p.thumbnail} onClose={(id)=> setPreviews(prev => prev.filter(x => x.id !== id))} />
+          ))}
         </div>
         <button
           className="sidebar-toggle-btn"

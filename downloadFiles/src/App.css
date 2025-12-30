@@ -38,7 +38,7 @@ html, body, #root, .mainContainer {
 }
 
 .titlebar {
-  height: 27px;
+  height: 37px;
   width: 100%;
   border-bottom: 1.8px solid #383a4b;
   -webkit-app-region: drag;
@@ -82,7 +82,7 @@ html, body, #root, .mainContainer {
 
 .searchbar-configbtns {
   display: flex;
-  height: 60px;
+  height: 80px;
   border-bottom: 1px solid rgb(56, 58, 75);
   margin-top: 4px;
 }
@@ -230,10 +230,10 @@ body, html {
 
 .sidebar-backdrop {
   position: fixed;
-  top: 91px; 
+  top: 66px; 
   left: 0;
   right: 0;
-  height: 507px; 
+  height: 537px; 
   background: rgba(0, 0, 0, 0.50);
   z-index: 1; 
   pointer-events: none; 
